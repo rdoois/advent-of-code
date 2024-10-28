@@ -12,15 +12,16 @@ func main() {
 	fmt.Println("Answer 2:", second(input))
 }
 
+var instructions = map[rune]int{
+	'(': 1,
+	')': -1,
+}
+
 func first(input string) int {
 	var floor int
 
 	for _, r := range input {
-		if r == '(' {
-			floor += 1
-		} else if r == ')' {
-			floor -= 1
-		}
+		floor += instructions[r]
 	}
 
 	return floor
@@ -30,12 +31,7 @@ func second(input string) int {
 	var floor int
 
 	for i, r := range input {
-		if r == '(' {
-			floor += 1
-		} else if r == ')' {
-			floor -= 1
-		}
-
+		floor += instructions[r]
 		if floor == -1 {
 			return i + 1
 		}
