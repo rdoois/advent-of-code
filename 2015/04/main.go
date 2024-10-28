@@ -12,6 +12,7 @@ import (
 func main() {
 	input := utils.ReadInput()
 	fmt.Println("Answer 1:", first(input))
+	fmt.Println("Answer 2:", second(input))
 }
 
 func first(input string) int {
@@ -20,6 +21,19 @@ func first(input string) int {
 		hashed := md5.Sum([]byte(hexadecimal))
 		word := hex.EncodeToString(hashed[:])
 		if strings.HasPrefix(word, "00000") {
+			return i
+		}
+	}
+
+	return 0
+}
+
+func second(input string) int {
+	for i := 0; i >= 0; i++ {
+		hexadecimal := fmt.Sprintf("%s%d", input, i)
+		hashed := md5.Sum([]byte(hexadecimal))
+		word := hex.EncodeToString(hashed[:])
+		if strings.HasPrefix(word, "000000") {
 			return i
 		}
 	}
